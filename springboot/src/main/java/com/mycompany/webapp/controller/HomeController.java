@@ -3,15 +3,21 @@ package com.mycompany.webapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.java.Log;
 
 @Controller
-@Log4j2
+@Log
 public class HomeController {
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@RequestMapping("/")
 	public String home() {
-		log.info("Home Run");
+//		logger.error("error"); logger.warn("warn"); logger.info("info");
+//		logger.debug("debug");
 		
-		return "home"; //resource > templates 안에서 찾음
+		log.info("home run");
+		
+		return "home";
 	}
+	
 }
