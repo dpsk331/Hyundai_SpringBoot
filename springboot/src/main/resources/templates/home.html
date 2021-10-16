@@ -2,10 +2,9 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <th:block th:replace="~{common/layout::setContent(~{this::content})}">
-    <th:block th:fragment="content">
+  <th:block th:replace="~{common/layout::setContent(~{this::#content})}">
     
-      <div class="card m-2">
+      <div id="content" class="card m-2">
         <div class="card-header">
           Home
         </div>
@@ -14,7 +13,6 @@
         </div>
       </div>
       
-    </th:block>
   </th:block>
   
 </html>
