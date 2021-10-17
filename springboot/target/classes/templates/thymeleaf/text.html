@@ -12,7 +12,7 @@
         <div class="card-body">
           <div>
             <h6 class="text-info">속성 삽입: th:text, th:utext</h6>
-            <div>bno: <span th:text="${board.bno}"></span></div>
+            <div>bno: <span data-th-text="${board.bno}"></span></div>
             <div>btitle: <span th:text="${board.btitle}"></span></div>
             <div>bcontent: <span th:text="${board.bcontent}"></span></div>
             <div>bcontent(unescaped): <span th:utext="${board.bcontent}"></span></div>
