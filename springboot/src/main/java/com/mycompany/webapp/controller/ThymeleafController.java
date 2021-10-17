@@ -20,14 +20,14 @@ public class ThymeleafController {
 	
 	@RequestMapping("/content")
 	public String content() {
-		log.info("content run");
+		log.info("Run");
 		
 		return "thymeleaf/content";
 	}
 	
 	@RequestMapping("/text")
 	public String text(Model model) {
-		log.info("text run");
+		log.info("Run");
 		
 		Board board = new Board();
 		board.setBno(1);
@@ -43,7 +43,7 @@ public class ThymeleafController {
 	
 	@RequestMapping("/javascript")
 	public String javascript(Model model) {
-		log.info("javascript run");
+		log.info("Run");
 		
 		model.addAttribute("name", "홍길동");
 	      
@@ -65,7 +65,7 @@ public class ThymeleafController {
 	
 	@RequestMapping("/variableExpressions")
 	public String variableExpressions(HttpSession session) {
-		log.info("variableExpressions run");
+		log.info("Run");
 		
 		if(session.getAttribute("sessionMid") == null) {
 			session.setAttribute("sessionMid", "thymeleaf");

@@ -15,7 +15,7 @@ public class HomeController {
 //		logger.error("error"); logger.warn("warn"); logger.info("info");
 //		logger.debug("debug");
 		
-		log.info("home run");
+		log.info("Run");
 		
 		return "home";
 	}
