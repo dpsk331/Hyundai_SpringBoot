@@ -2,6 +2,8 @@ package com.mycompany.webapp.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,4 +63,17 @@ public class ThymeleafController {
 		return "thymeleaf/javascript";
 	}
 	
+	@RequestMapping("/variableExpressions")
+	public String variableExpressions(HttpSession session) {
+		log.info("variableExpressions run");
+		
+		if(session.getAttribute("sessionMid") == null) {
+			session.setAttribute("sessionMid", "thymeleaf");
+		} else {
+			session.removeAttribute("sessionMid");
+		}
+		
+		return "thymeleaf/variableExpressions";
+	}
+
 }
