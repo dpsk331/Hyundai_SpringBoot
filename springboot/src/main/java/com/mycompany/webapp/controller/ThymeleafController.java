@@ -93,6 +93,13 @@ public class ThymeleafController {
 	    
 	    return "thymeleaf/selectionVariableExpressions";
 	}
+	
+	@RequestMapping("/messageExpressions")
+	public String messageExpressions() {
+		log.info("Run");
+	    
+	    return "thymeleaf/messageExpressions";
+	}
 }
 
 
