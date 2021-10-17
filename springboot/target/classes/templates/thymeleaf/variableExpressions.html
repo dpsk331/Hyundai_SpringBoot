@@ -10,7 +10,22 @@
           Variable Expressions
         </div>
         <div class="card-body">
-          Login ID: [[${session.sessionMid}]]
+          <div>Login ID: [[${session.sessionMid}]]</div>
+          <div>
+            <a th:if="${session.sessionMid == null}" href="variableExpressions" class="btn btn-info btn-sm">로그인</a>
+            <a th:if="${session.sessionMid != null}" href="variableExpressions" class="btn btn-info btn-sm">로그아웃</a>
+          </div>
+          <hr />
+          <div>
+            <!-- null일 경우 null로 출력 -->
+            <div th:text="${'Current user: ' + session.sessionMid}"></div>
+            <div th:text="'Current user: ' + ${session.sessionMid}"></div>
+            <div th:text="|Current user: ${session.sessionMid}|"></div>
+            
+            <!-- null일 경우 공백으로 출력 -->
+            <div th:text="'Current user: ' + ((${session.sessionMid})?${session.sessionMid}:' ')"></div>
+            <div>Current user: [[${session.sessionMid}]]</div>
+          </div>
         </div>
       </div>
       

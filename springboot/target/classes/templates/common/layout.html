@@ -22,13 +22,13 @@
             Spring Boot
           </a>
           <div>
-            <div>
+            <div th:if="${session.sessionMid == null}">
               <a href="/" class="btn btn-info btn-sm">로그인</a>
             </div>
-            <!-- <div>
-              User: <span></span>
+            <div th:if="${session.sessionMid != null}">
+              <span>User: [[${session.sessionMid}]]</span>
               <a href="/" class="btn btn-info btn-sm ml-2">로그아웃</a>
-            </div> -->
+            </div>
           </div>
         </nav>
     
