@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.Board;
 
@@ -100,6 +102,28 @@ public class ThymeleafController {
 	    
 	    return "thymeleaf/messageExpressions";
 	}
+	
+	@RequestMapping({"/linkUrlExpressions/{typeId}/detail",
+					"/linkUrlExpressions/{typeId}/update"})
+	public String linkUrlExpressions(@PathVariable String typeId,
+									 @RequestParam(defaultValue="") String productId, 
+									 //매개변수는 무조건 문자열로 오는데 null이 들어올 경우 int 타입으로 변환을 할 수 없기 떄문에 기본값을 주는 것
+									 @RequestParam(defaultValue="1") int pageNo,
+									 Model model) { 
+		log.info("Run");
+		log.info("typeId: " + typeId);
+		log.info("productId: " + productId);
+		log.info("pageNo: " + pageNo);
+	    
+		model.addAttribute("typeId", "t1");
+	    model.addAttribute("productId", "p1");
+	    model.addAttribute("pageNo", "1");
+        model.addAttribute("url1", "/thymeleaf/linkUrlExpressions/t1/detail");
+	    model.addAttribute("url2", "/t1/detail");
+		
+	    return "thymeleaf/linkUrlExpressions";
+	}
+	
 }
 
 
