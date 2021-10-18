@@ -180,7 +180,7 @@ public class ThymeleafController {
 			session.removeAttribute("sessionMid");
 		}
    
-		model.addAttribute("type", "c");
+		model.addAttribute("type", "b");
    
 		return "thymeleaf/conditional";
     }
