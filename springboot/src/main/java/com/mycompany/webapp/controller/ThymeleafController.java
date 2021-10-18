@@ -128,22 +128,22 @@ public class ThymeleafController {
 	
     @RequestMapping("/builtinObject")
     public String builtinObject(HttpServletRequest request, HttpSession session, Model model) {
-       log.info("실행");
+    	log.info("실행");
       
-       //request 범위
-       request.setAttribute("title", "spring boot");
-       model.addAttribute("today", new Date());
-       model.addAttribute("array", new String[] {"spring", "boot", "thymeleaf"});
+       	//request 범위
+       	request.setAttribute("title", "spring boot");
+       	model.addAttribute("today", new Date());
+       	model.addAttribute("array", new String[] {"spring", "boot", "thymeleaf"});
+       	
+       	//session 범위(같은 브라우저에서 공유)
+       	session.setAttribute("sessionMid", "thymeleaf");
        
-       //session 범위(같은 브라우저에서 공유)
-       session.setAttribute("sessionMid", "thymeleaf");
-       
-       //application 범위(모든 브라우저에서 공유)
-       ServletContext application = session.getServletContext();
-       application.setAttribute("visitorCount", 100);
+       	//application 범위(모든 브라우저에서 공유)
+       	ServletContext application = session.getServletContext();
+       	application.setAttribute("visitorCount", 100);
       
-       return "thymeleaf/builtinObject";
-   }
+       	return "thymeleaf/builtinObject";
+    }
 	
 }
 
