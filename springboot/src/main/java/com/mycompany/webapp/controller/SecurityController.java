@@ -41,4 +41,25 @@ public class SecurityController {
 		return "security/accessDenied";
 	}
 	
+	@RequestMapping("/admin/action")
+	public String adminAction() {
+		log.info("Run");
+		
+		return "redirect:/security/content";
+	}
+	   
+	@RequestMapping("/manager/action")
+	public String managerAction() {
+		log.info("Run");
+		
+		return "redirect:/security/content";
+	}
+   
+	@RequestMapping("/user/action")
+	public String userAction() {
+		log.info("Run");
+		
+		return "redirect:/security/content";
+	}
+	
 }
