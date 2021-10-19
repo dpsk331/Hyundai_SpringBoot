@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -13,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+
+import com.mycompany.webapp.service.CustomUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,6 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Resource
 	private DataSource dataSource;
 	
+	@Resource
+	private CustomUserDetailsService customUserDetailsService;
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		log.info("Run passwordEncoder()");
@@ -66,13 +72,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		log.info("Run AuthenticationManagerBuilder");
 		
-		//DB에서 가져올 사용자 정보 설정
-		auth.jdbcAuthentication()
-			.dataSource(dataSource)
-			.usersByUsernameQuery("SELECT mid, mpassword, menabled FROM member WHERE mid=?")
-			.authoritiesByUsernameQuery("SELECT mid, mrole FROM member WHERE mid=?")
-			//패스워드 인코딩 방법 설정
-			.passwordEncoder(passwordEncoder()); //default: DelegatingPasswordEncoder
+//		//DB에서 가져올 사용자 정보 설정
+//		auth.jdbcAuthentication()
+//			.dataSource(dataSource)
+//			.usersByUsernameQuery("SELECT mid, mpassword, menabled FROM member WHERE mid=?")
+//			.authoritiesByUsernameQuery("SELECT mid, mrole FROM member WHERE mid=?")
+//			//패스워드 인코딩 방법 설정
+//			.passwordEncoder(passwordEncoder()); //default: DelegatingPasswordEncoder
+		
+		//커스텀 사용자 정보 사용
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setUserDetailsService(customUserDetailsService);
+		provider.setPasswordEncoder(passwordEncoder());
+		auth.authenticationProvider(provider);
 	}
 	
 	//권한 계층을 참조하기 위해 HttpSecurity에서 사용하기 때문에 관리빈으로 반드시 등록해서 사용해야 함

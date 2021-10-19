@@ -1,8 +1,11 @@
 package com.mycompany.webapp.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mycompany.webapp.security.CustomUserDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,8 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 public class SecurityController {
 	
 	@RequestMapping("/content")
-	public String content() {
+	public String content(Authentication authentication) {
 		log.info("Run");
+		
+		if(authentication != null && authentication.isAuthenticated()) {
+//			log.info(authentication.getPrincipal().toString());
+			CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+			log.info(customUserDetails.getUsername());
+			log.info(customUserDetails.getUseremail());
+		}
 		
 		return "security/content";
 	}
