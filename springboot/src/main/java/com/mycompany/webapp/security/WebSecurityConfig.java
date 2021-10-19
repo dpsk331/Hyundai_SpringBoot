@@ -26,8 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//로그인 설정
 		http.formLogin()
-			.loginPage("/security/loginForm") 		//default: /login(GET)
-			.loginProcessingUrl("login")	  		//default: /login(POST)
+			.loginPage("/security/loginForm") 		//default: /login (GET)
+			.loginProcessingUrl("/login")	  		//default: /login (POST)
 			.failureUrl("/security/loginError")		//default: /login?error
 			.defaultSuccessUrl("/security/content")
 			.usernameParameter("mid")				//default: username
